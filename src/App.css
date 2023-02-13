@@ -214,4 +214,7 @@ textarea {
     padding: 20px;
     border-radius: 15px;
   }
+  .deletePost button {
+    font-size: 20px;
+  }
 }
