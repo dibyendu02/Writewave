@@ -3,9 +3,11 @@ import {BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import CreatePost from './pages/CreatePost';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { signOut } from "firebase/auth";
-import { auth } from "./firebase-config";
+import { auth, db } from "./firebase-config";
+import { ViewPost } from './pages/ViewPost';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -30,7 +32,11 @@ function App() {
         <Route path="/" element={<Home isAuth={isAuth}/>} />
         <Route path="/createpost" element={<CreatePost isAuth={isAuth}/>} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth}/>} />
+        <Route path="/:id" element={<ViewPost/>}/>
       </Routes>
+      <footer>
+        <p>Made with ❤️ by<a href="#">Dibyendu</a></p>
+      </footer>
     </Router>
   );
 }
