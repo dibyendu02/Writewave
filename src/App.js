@@ -8,6 +8,11 @@ import { signOut } from "firebase/auth";
 import { auth, db } from "./firebase-config";
 import { ViewPost } from './pages/ViewPost';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'
+import Navbar from './components/Navbar';
+import About from './pages/About';
+import Profile from './pages/Profile';
+import Blogs from './pages/Blogs';
+import Footer from './components/Footer';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -20,23 +25,28 @@ function App() {
   }
   return (
     <Router>
-      <nav>
+      {/* <nav>
         <Link to="/">Home</Link>
         {!isAuth ? <Link to="/login">Login</Link> : 
         <>
         <Link to="/createpost">Create Post</Link>
         <button className='logout-btn' onClick={userLogout}>Logout</button>
         </>}
-      </nav>
+      </nav> */}
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home isAuth={isAuth}/>} />
         <Route path="/createpost" element={<CreatePost isAuth={isAuth}/>} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth}/>} />
         <Route path="/:id" element={<ViewPost/>}/>
+        <Route path="/about" element={<About/>}/>
+        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/blogs" element={<Blogs/>}/>
       </Routes>
-      <footer>
+      {/* <footer>
         <p>Made with ❤️ by<a href="#">Dibyendu</a></p>
-      </footer>
+      </footer> */}
+      <Footer/>
     </Router>
   );
 }
