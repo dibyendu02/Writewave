@@ -33,7 +33,7 @@ function App() {
         <button className='logout-btn' onClick={userLogout}>Logout</button>
         </>}
       </nav> */}
-      <Navbar/>
+      <Navbar isAuth={isAuth} setIsAuth={setIsAuth}/>
       <Routes>
         <Route path="/" element={<Home isAuth={isAuth}/>} />
         <Route path="/createpost" element={<CreatePost isAuth={isAuth}/>} />
