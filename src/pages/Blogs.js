@@ -1,52 +1,74 @@
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
-import { auth, db } from '../firebase-config';
-import {Link, useNavigate} from 'react-router-dom';
-import { ViewPost } from './ViewPost';
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { auth, db } from "../firebase-config";
+import { Link, useNavigate } from "react-router-dom";
+import { ViewPost } from "./ViewPost";
+import Footer from "../components/Footer";
 
-function Blogs({isAuth}) {
+function Blogs({ isAuth }) {
   const postCollectionRef = collection(db, "posts");
   const [postLists, setPostList] = useState([]);
 
   useEffect(() => {
     const getPosts = async () => {
       const data = await getDocs(postCollectionRef);
-      console.log(data.data);
-      setPostList(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+      setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getPosts();
-  },[postLists]);
+  }, []);
 
   const deletePost = async (id) => {
     const postDoc = doc(db, "posts", id);
     await deleteDoc(postDoc);
-    };
+  };
 
-  let navigate = useNavigate(); 
-  
+  const navigate = useNavigate();
+
   return (
-    <div className="homePage">
-      {postLists.map((post) => {
-        return (
-          <div className="post" key={post.id}>
-            <div className="postHeader">
-              <div className="title">
-                <h1> {post.title}</h1>
+    <>
+    <div className="md:w-2/3 px-10 m-auto pt-40">
+      <h1 className="text-6xl font-bold text-blue-400">Trending Blogs</h1>
+      <div className="w-full flex flex-col gap-10 justify-center items-center my-20 mx-auto">
+        {postLists.map((post) => {
+          return (
+            <div
+              className=" overflow-hidden md:w-[60vw] p-5 rounded-lg border-solid border-2 cursor-pointer"
+              key={post.id}
+            >
+              <div className="flex">
+                <div
+                  className="font-bold text-xl"
+                  onClick={() => {
+                    navigate("post/"+post.id);
+                  }}
+                >
+                  <h1> {post.title}</h1>
+                </div>
               </div>
-              <div className='deletePost'> 
-              {isAuth && post.author.id === auth.currentUser.uid  && (<button onClick={() => {
-                deletePost(post.id)
-              }}>&#128465;</button>) }
+              <div
+                className="line-clamp-4 text-slate-600 "
+                onClick={() => {
+                  navigate("post/"+post.id);
+                }}
+              >
+                {" "}
+                {post.postText}{" "}
               </div>
+              <h3
+                className="font-bold text-blue-500"
+                onClick={() => {
+                  navigate("user/"+post.author.id);
+                }}
+              >
+                @{post.author.name}
+              </h3>
             </div>
-            <div className="postTextContainer"> {post.postText} </div>
-            <button className='readmoreButton' onClick={() => {navigate(post.id)}}>Read More</button>
-            <h3>@{post.author.name}</h3>
-          </div>
-        );
-      })}
-
+          );
+        })}
+      </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 
