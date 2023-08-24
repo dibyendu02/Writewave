@@ -40,11 +40,13 @@ const TestimonialData = [
   },
 ];
 
+
+//flex flex-wrap mt-20 gap-5 justify-center
 const Testimonials = () => {
   return (
     <div className="h-full flex flex-col items-center py-40">
-      <h1 className="text-5xl font-bold">Loved by Writers All Over World</h1>
-      <div className="flex flex-wrap mt-20 gap-5 justify-center">
+      <h1 className="text-5xl font-bold p-5 text-center">Loved by Writers All Over World</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-10 ">
         {TestimonialData.map((item) => (
           <TestimonialCard
             comment={item.comment}

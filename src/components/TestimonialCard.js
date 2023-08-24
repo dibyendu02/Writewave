@@ -3,7 +3,7 @@ import person from "../images/person.jpg"
 
 const TestimonialCard = ({comment,name,position}) => {
   return (
-    <div className="h-full w-[25%] p-10 bg-white rounded-xl drop-shadow-lg">
+    <div className="h-fit w-[100%] p-10 bg-white rounded-xl drop-shadow-lg">
         <div className="border-b mb-5 pb-5">
             <p className="leading-relaxed text-xl">
                 {comment}
