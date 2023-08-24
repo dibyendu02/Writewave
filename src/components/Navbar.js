@@ -70,7 +70,7 @@ const Navbar = ({ isAuth, setIsAuth }) => {
         <li>
           {!isAuth ? (
             <Link className="text-[16px] font-bold" to="/login">
-              <button class="rounded-full bg-blue-600 hover:bg-blue-300 w-[100px] p-1">
+              <button class="rounded-full text-white bg-blue-600 hover:bg-blue-300 w-[100px] p-1">
                 Login
               </button>
             </Link>
