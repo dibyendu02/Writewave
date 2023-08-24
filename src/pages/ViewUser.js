@@ -84,8 +84,8 @@ export const ViewUser = () => {
                   <div
                     className="line-clamp-4 text-slate-600"
                     onClick={() => {
-                      navigate("post/" + post.id);
-                    }}
+                        navigate("../blogs/post/" + post.id);
+                      }}
                   >
                     {" "}
                     {post.postText}{" "}
