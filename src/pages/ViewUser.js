@@ -66,6 +66,7 @@ export const ViewUser = () => {
         <div className="w-full flex flex-col gap-10 justify-center items-center my-20 md:mx-auto px-5">
           {postLists.map((post) => {
             if (post.author.id === id.userid) {
+              const body = post.postText;
               return (
                 <div
                   className="overflow-hidden p-5 rounded-lg border-solid border-2 cursor-pointer"
@@ -87,8 +88,9 @@ export const ViewUser = () => {
                         navigate("../blogs/post/" + post.id);
                       }}
                   >
-                    {" "}
-                    {post.postText}{" "}
+                    
+                    <div  dangerouslySetInnerHTML={{__html: body}} />
+                    {/* {post.postText} */}
                   </div>
                   <h3 className="font-bold text-blue-500">
                     @{post.author.name}
