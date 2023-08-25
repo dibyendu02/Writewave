@@ -23,13 +23,13 @@ function Blogs({ isAuth }) {
   };
 
   const navigate = useNavigate();
-
   return (
     <>
     <div className="md:w-2/3 px-10 m-auto pt-40">
       <h1 className="text-6xl font-bold text-blue-400">Trending Blogs</h1>
       <div className="w-full flex flex-col gap-10 justify-center items-center my-20 mx-auto">
         {postLists.map((post) => {
+          const body = post.postText;
           return (
             <div
               className=" overflow-hidden md:w-[60vw] p-5 rounded-lg border-solid border-2 cursor-pointer"
@@ -51,8 +51,8 @@ function Blogs({ isAuth }) {
                   navigate("post/"+post.id);
                 }}
               >
-                {" "}
-                {post.postText}{" "}
+                {/* {post.postText} */}
+                <div  dangerouslySetInnerHTML={{__html: body}} />
               </div>
               <h3
                 className="font-bold text-blue-500"
